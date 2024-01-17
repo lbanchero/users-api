@@ -1,6 +1,7 @@
 import express, {Express, Request, Response} from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
+import userRoutes from './routes/userRoutes';
 
 dotenv.config();
 
@@ -9,12 +10,7 @@ app.use(cors())
   .use(express.json())
   .options('*', cors());
 
-app.post('/users', (req: Request, res: Response) => {
-  res.send({}).status(201);
-});
-app.get('/users', (req: Request, res: Response) => {
-  res.send([]).status(200);
-});
+app.use('/users', userRoutes);
 
 const port = process.env.PORT || 3111;
 app.listen(port, () => {
