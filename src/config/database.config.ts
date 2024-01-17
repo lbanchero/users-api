@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export class Database {
+export default class Database {
     private static instance: Database;
     private uri: string;
 

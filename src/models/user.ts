@@ -1,7 +1,12 @@
+import { ObjectId } from 'mongodb';
 import mongoose from 'mongoose';
 import IUser from './interfaces/IUser';
 
 const userSchema = new mongoose.Schema({
+    _id: {
+        type: ObjectId,
+        required: true,
+    },
     email: {
         type: String,
         required: true,

@@ -1,14 +1,10 @@
 import express, { Router } from 'express';
-import UserRepository from '../repositories/userRepository';
+import { container } from 'tsyringe';
 import UserController from '../controllers/userController';
-import UserService from '../services/userService';
 
-const router: Router = express.Router();
-const userRepository = new UserRepository();
-const userService = new UserService(userRepository);
-const userController = new UserController(userService);
+export default function configureUserRoutes(router: Router): void {
+    const userController = container.resolve(UserController);
 
-router.get('/', userController.getAllUsers.bind(userController));
-router.post('/', userController.createUser.bind(userController));
-
-export default router;
+    router.get('/users', userController.getAllUsers.bind(userController));
+    router.post('/users', userController.createUser.bind(userController));
+}

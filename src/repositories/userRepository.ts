@@ -1,7 +1,9 @@
+import { injectable } from 'tsyringe';
 import UserModel from '../models/user';
 import IUser from '../models/interfaces/IUser';
 import IUserRepository from './interfaces/IUserRepository';
 
+@injectable()
 class UserRepository implements IUserRepository {
     public async createUser(userDetails: IUser): Promise<IUser> {
         try {

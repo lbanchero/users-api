@@ -1,12 +1,12 @@
+import { injectable, inject } from 'tsyringe';
 import { Request, Response } from 'express';
 import IUserService from '../services/interfaces/IUserService';
 
+@injectable()
 class UserController {
-    private userService: IUserService;
-
-    constructor(userService: IUserService) {
-        this.userService = userService;
-    }
+    constructor(
+        @inject("IUserService") private userService: IUserService
+    ) {}
 
     public getAllUsers(req: Request, res: Response) {
         res.send({}).status(200);

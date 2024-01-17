@@ -1,16 +1,18 @@
+import { injectable, inject } from 'tsyringe';
+import { ObjectId } from 'mongodb';
 import IUser from "../models/interfaces/IUser";
-import UserRepository from "../repositories/userRepository";
+import IUserRepository from "../repositories/interfaces/IUserRepository";
 import IUserService from "./interfaces/IUserService";
 
+@injectable()
 class UserService implements IUserService {
-    private userRepository: UserRepository;
-
-    constructor(userRepository: UserRepository) {
-        this.userRepository = userRepository;
-    }
+    constructor(
+        @inject("IUserRepository") private userRepository: IUserRepository
+    ) {}
 
     public async create(email: string): Promise<IUser> {
         const user: IUser = {
+            _id: new ObjectId(),
             email: email,
             createdAt: new Date(),
         };

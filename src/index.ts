@@ -1,17 +1,21 @@
-import express, {Express, Request, Response} from 'express';
+import 'reflect-metadata';
+import express, { Express } from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
-import userRoutes from './routes/userRoutes';
-import { Database } from './config/database.config';
+import Database from './config/database.config';
+import configureDI from './config/di.config';
+import configureRoutes from './config/routes.config';
 
 dotenv.config();
+
+configureDI();
 
 const app: Express = express();
 app.use(cors())
   .use(express.json())
   .options('*', cors());
 
-app.use('/users', userRoutes);
+app.use(configureRoutes());
 
 const port = process.env.PORT || 3111;
 

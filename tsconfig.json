@@ -10,6 +10,8 @@
     "outDir": "./dist",
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "target": "ES6",
     "types": [
       "node"
