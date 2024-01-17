@@ -2,6 +2,7 @@ import express, {Express, Request, Response} from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
 import userRoutes from './routes/userRoutes';
+import { Database } from './config/database.config';
 
 dotenv.config();
 
@@ -13,6 +14,9 @@ app.use(cors())
 app.use('/users', userRoutes);
 
 const port = process.env.PORT || 3111;
+
+Database.getInstance().connect();
+
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });

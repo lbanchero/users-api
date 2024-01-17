@@ -1,12 +1,21 @@
 import { Request, Response } from 'express';
+import IUserService from '../services/interfaces/IUserService';
 
 class UserController {
-    static getAllUsers(req: Request, res: Response) {
+    private userService: IUserService;
+
+    constructor(userService: IUserService) {
+        this.userService = userService;
+    }
+
+    public getAllUsers(req: Request, res: Response) {
         res.send({}).status(200);
     }
 
-    static createUser(req: Request, res: Response) {
-        res.send({}).status(201);
+    public async createUser(req: Request, res: Response) {
+        const createdUser = await this.userService.create(req.body.email);
+
+        res.send(createdUser).status(200);
     }
 }
 
