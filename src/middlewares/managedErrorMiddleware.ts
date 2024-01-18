@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import { IStatusError } from '../types/IStatusError';
+import { StatusError } from '../utils/statusError';
 
-export default function managedErrorMiddleware(err: IStatusError, req: Request, res: Response, next: NextFunction) {
-    if (err.status) {
+export default function managedErrorMiddleware(err: Error, req: Request, res: Response, next: NextFunction) {
+    if (err instanceof StatusError) {
         res.status(err.status).json({
             error: {
                 status: err.status,

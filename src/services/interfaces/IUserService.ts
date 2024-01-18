@@ -1,8 +1,8 @@
-import IUser from "../../models/interfaces/IUser";
+import { UserDto } from "../../dtos/userDto";
 
 interface IUserService {
-    getAll(sort?: string): Promise<IUser[]>
-    create(email: string): Promise<IUser>
+    getAll(sort?: string): Promise<UserDto[]>
+    create(email: string): Promise<UserDto>
 }
 
 export default IUserService;

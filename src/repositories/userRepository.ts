@@ -25,10 +25,19 @@ class UserRepository implements IUserRepository {
         try {
             const user = new UserModel(userDetails);
             await user.save();
-
             return user.toObject();
         } catch (error) {
             console.error('Error creating user:', error);
+            throw error;
+        }
+    }
+
+    public async checkUserExistsByEmail(email: string): Promise<boolean> {
+        try {
+            const userCount = await UserModel.countDocuments({ email: email });
+            return userCount > 0;
+        } catch (error) {
+            console.error('Error checking user existence by email:', error);
             throw error;
         }
     }
