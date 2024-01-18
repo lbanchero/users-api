@@ -20,10 +20,7 @@ export default class Database {
 
     public connect = async (): Promise<void> => {
         try {
-            await mongoose.connect(this.uri, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            } as mongoose.ConnectOptions);
+            await mongoose.connect(this.uri);
             console.log('MongoDB Connected');
         } catch (error) {
             console.error('MongoDB connection error:', error);
