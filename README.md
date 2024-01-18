@@ -7,19 +7,17 @@ This project skeleton contains a basic Express setup one endpoint to create a us
 ### Standard
 `npm start` starts the server
 
-* Remember to edit .env with the local mongodb instance at your machine.
 
 ### Using Dockerfile
 `docker build -t users-api .`
 
 `docker run -p 3000:4111 --name my-users-api users-api`
 
-* Remember to edit .env with the local mongodb instance at your machine.
-
 ### Using Docker Compose
 `docker-compose up` creates the container with a mondodb instance and starts the server.
 
-* No need to edit .env
+* Remember to edit .env with the local mongodb instance at your machine.
+`MONGO_DB_URL=mongodb://localhost:27017/users-db`
 
 ## Scripts for running the tests
 `npm test` executes the tests
