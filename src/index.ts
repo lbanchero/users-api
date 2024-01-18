@@ -21,7 +21,7 @@ app.use(cors())
 app.use(configureRoutes());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use(configureMiddlewares)
+app.use(configureMiddlewares())
 
 const port = process.env.PORT || 3111;
 
