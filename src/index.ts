@@ -6,6 +6,8 @@ import Database from './config/database.config';
 import configureDI from './config/di.config';
 import configureRoutes from './config/routes.config';
 import configureMiddlewares from './config/middlewares.config';
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './config/swagger.config';
 
 dotenv.config();
 
@@ -17,6 +19,8 @@ app.use(cors())
   .options('*', cors());
 
 app.use(configureRoutes());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 app.use(configureMiddlewares)
 
 const port = process.env.PORT || 3111;
