@@ -14,7 +14,8 @@
     "emitDecoratorMetadata": true,
     "target": "ES6",
     "types": [
-      "node"
+      "node",
+      "jest"
     ]
   },
   "include": [
