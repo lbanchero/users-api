@@ -6,7 +6,7 @@ import configureDependencyInjection from './config/di.config';
 import configureRoutes from './config/routes.config';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './config/swagger.config';
-import managedErrorMiddleware from './middlewares/managedErrorMiddleware';
+import errorMiddleware from './middlewares/managedErrorMiddleware';
 import notFoundErrorMiddleware from './middlewares/notFoundErrorMiddleware';
 import connectDB from './config/database.config';
 
@@ -23,7 +23,7 @@ app.use(configureRoutes());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use(managedErrorMiddleware);
+app.use(errorMiddleware);
 app.use(notFoundErrorMiddleware);
 
 const port = process.env.PORT || 3111;
