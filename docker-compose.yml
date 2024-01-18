@@ -1,17 +1,20 @@
 version: '3.8'
 services:
-  users-api:
-    container_name: users-api-container
+  api:
+    container_name: api
     build: .
     ports:
-      - "3000:4111"
+      - "4111:4111"
     env_file: 
-          - .env
+      - .env
+    environment:
+      - PORT=4111
+      - MONGO_DB_URL=mongodb://database:27017/users-db
     depends_on:
       - database
 
   database:
-    container_name: database-container
+    container_name: database
     image: mongo
     ports:
       - "27017:27017"

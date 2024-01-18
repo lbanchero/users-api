@@ -10,7 +10,7 @@ COPY . .
 
 RUN npm run build
 
-EXPOSE 3000
+EXPOSE 4111
 
 RUN ls -la /usr/src/app/
 
