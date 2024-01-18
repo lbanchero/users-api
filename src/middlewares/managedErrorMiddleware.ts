@@ -1,16 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatusError } from '../utils/statusError';
 
-export default function managedErrorMiddleware(err: Error, req: Request, res: Response, next: NextFunction) {
-    if (err instanceof StatusError) {
-        res.status(err.status)
-           .json({
-               error: {
-                   status: err.status,
-                   message: err.message,
-               },
-           });
-    } else {
-        next(err);
-    }
+function managedErrorMiddleware(error: StatusError, request: Request, response: Response, next: NextFunction) {
+  const status = error.status ? error.status : 500;
+  const message = status === 500 ? "There was an error processing the request. Try again in a few minutes." : error.message;
+  response.status(status).send({ status, message, stack: error.stack });
 }
+
+export default managedErrorMiddleware;

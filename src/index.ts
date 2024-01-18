@@ -5,9 +5,10 @@ import cors from 'cors';
 import Database from './config/database.config';
 import configureDI from './config/di.config';
 import configureRoutes from './config/routes.config';
-import configureMiddlewares from './config/middlewares.config';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './config/swagger.config';
+import managedErrorMiddleware from './middlewares/managedErrorMiddleware';
+import notFoundErrorMiddleware from './middlewares/notFoundErrorMiddleware';
 
 dotenv.config();
 
@@ -21,11 +22,12 @@ app.use(cors())
 app.use(configureRoutes());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use(configureMiddlewares())
-
 const port = process.env.PORT || 3111;
 
 Database.getInstance().connect();
+
+app.use(managedErrorMiddleware);
+app.use(notFoundErrorMiddleware);
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
