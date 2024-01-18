@@ -10,6 +10,10 @@ class UserService implements IUserService {
         @inject("IUserRepository") private userRepository: IUserRepository
     ) {}
 
+    public async getAll(sort?: string): Promise<IUser[]> {
+        return await this.userRepository.getAllUsers(sort);
+    }
+
     public async create(email: string): Promise<IUser> {
         const user: IUser = {
             _id: new ObjectId(),
