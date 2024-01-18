@@ -1,30 +1,17 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 
-dotenv.config();
+const connectDB = () => {
+  const options = {
+    maxPoolSize: 10,
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 45000,
+    family: 4,
+  };
 
-export default class Database {
-    private static instance: Database;
-    private uri: string;
+  mongoose
+    .connect(process.env.MONGO_DB_URL, options)
+    .then(() => console.log("MongoDB connected successfully"))
+    .catch((err) => console.log(err));
+};
 
-    private constructor() {
-        this.uri = process.env.MONGO_DB_URL || 'TEST';
-    }
-
-    public static getInstance(): Database {
-        if (!Database.instance) {
-            Database.instance = new Database();
-        }
-        return Database.instance;
-    }
-
-    public connect = async (): Promise<void> => {
-        try {
-            await mongoose.connect(this.uri);
-            console.log('MongoDB Connected');
-        } catch (error) {
-            console.error('MongoDB connection error:', error);
-            process.exit(1);
-        }
-    };
-}
+export default connectDB;
