@@ -3,9 +3,8 @@ import swaggerJSDoc from 'swagger-jsdoc';
 const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
-    title: 'Express API with Swagger',
+    title: 'Users API',
     version: '1.0.0',
-    description: 'users-api with Swagger',
   }
 };
 

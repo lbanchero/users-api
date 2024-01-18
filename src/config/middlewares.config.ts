@@ -6,9 +6,9 @@ import generalErrorMiddleware from '../middlewares/generalErrorMiddleware';
 export default function configureMiddlewares(): Router {
     const router = Router();
 
-    router.use(notFoundErrorMiddleware);
     router.use(managedErrorMiddleware);
     router.use(generalErrorMiddleware);
+    router.use(notFoundErrorMiddleware);
 
     return router;
 }
